@@ -1,4 +1,4 @@
-# php-ffmpeg
+# php-ffmpeg (Edited to work with laravel 6+)
 
 [![Build Status](https://secure.travis-ci.org/PHP-FFMpeg/PHP-FFMpeg.png?branch=master)](http://travis-ci.org/PHP-FFMpeg/PHP-FFMpeg)
 
