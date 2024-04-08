@@ -12,14 +12,14 @@ An Object-Oriented library to convert video/audio files with FFmpeg / AVConv.
 ### How this library works:
 
 This library requires a working [FFMpeg install](https://ffmpeg.org/download.html). You will need both FFMpeg and FFProbe binaries to use it.
-Be sure that these binaries can be located with system PATH to get the benefit of the binary detection,
-otherwise you should have to explicitly give the binaries path on load.
+Be sure that these binaries can be located with system PATH to get the benefit of binary detection,
+otherwise, you should have to explicitly give the binaries path on load.
 
 ### Known issues:
 
 - Using rotate and resize will produce a corrupted output when using
 [libav](http://libav.org/) 0.8. The bug is fixed in version 9. This bug does not
-appear in latest ffmpeg version.
+appear in the latest ffmpeg version.
 
 ## Installation
 
@@ -54,12 +54,12 @@ $video
 
 ## Documentation
 
-This documentation is an introduction to discover the API. It's recommended
+This documentation is an introduction to discovering the API. It's recommended
 to browse the source code as it is self-documented.
 
 ### FFMpeg
 
-`FFMpeg\FFMpeg` is the main object to use to manipulate medias. To build it,
+`FFMpeg\FFMpeg` is the main object to use to manipulate media. To build it,
 use the static `FFMpeg\FFMpeg::create`:
 
 ```php
@@ -90,9 +90,9 @@ $ffmpeg = FFMpeg\FFMpeg::create(array(
 ### Manipulate media
 
 `FFMpeg\FFMpeg` creates media based on URIs. URIs could be either a pointer to a
-local filesystem resource, an HTTP resource or any resource supported by FFmpeg.
+local filesystem resource, an HTTP resource, or any resource supported by FFmpeg.
 
-**Note**: To list all supported resource type of your FFmpeg build, use the
+**Note**: To list all supported resource types of your FFmpeg build, use the
 `-protocols` command:
 
 ```
@@ -134,7 +134,7 @@ $format
 $video->save($format, 'video.avi');
 ```
 
-Transcoding progress can be monitored in realtime, see Format documentation
+Transcoding progress can be monitored in real-time, see Format documentation
 below for more information.
 
 ##### Extracting image
@@ -143,7 +143,7 @@ You can extract a frame at any timecode using the `FFMpeg\Media\Video::frame`
 method.
 
 This code returns a `FFMpeg\Media\Frame` instance corresponding to the second 42.
-You can pass any `FFMpeg\Coordinate\TimeCode` as argument, see dedicated
+You can pass any `FFMpeg\Coordinate\TimeCode` as an argument, see the dedicated
 documentation below for more information.
 
 ```php
@@ -175,7 +175,7 @@ $video->addFilter($filter);
 
 ##### Clip
 
-Cuts the video at a desired point. Use input seeking method. It is faster option than use filter clip.
+Cuts the video at a desired point. Use input seeking method. It is a faster option than using a filter clip.
 
 ```php
 $clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
@@ -187,7 +187,7 @@ The clip filter takes two parameters:
 - `$start`, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the start point of the clip
 - `$duration`, optional, an instance of `FFMpeg\Coordinate\TimeCode`, specifies the duration of the clip
 
-On clip you can apply same filters as on video. For example resizing filter.
+On clip, you can apply the same filters as on video. For example resizing filter.
 
 ```php
 $clip = $video->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coordinate\TimeCode::fromSeconds(15));
@@ -211,7 +211,7 @@ $waveform = $audio->waveform(640, 120, array('#00FF00'));
 $waveform->save('waveform.png');
 ```
 
-If you want to get a waveform from a video, convert it in an audio file first.
+If you want to get a waveform from a video, convert it into an audio file first.
 
 ```php
 // Open your video file
@@ -277,7 +277,7 @@ The resize filter takes three parameters:
 - `$mode`, one of the constants `FFMpeg\Filters\Video\ResizeFilter::RESIZEMODE_*` constants
 - `$useStandards`, a boolean to force the use of the nearest aspect ratio standard.
 
-If you want a video in a non-standard ratio, you can use the padding filter to resize your video in the desired size, and wrap it into black bars.
+If you want a video in a non-standard ratio, you can use the padding filter to resize your video to the desired size and wrap it into black bars.
 
 ```php
 $video->filters()->pad($dimension);
@@ -287,7 +287,7 @@ The pad filter takes one parameter:
 
 - `$dimension`, an instance of `FFMpeg\Coordinate\Dimension`
 
-Don't forget to save it afterwards.
+Don't forget to save it afterward.
 
 ```php
 $video->save(new FFMpeg\Format\Video\X264(), $new_file);
@@ -309,7 +309,7 @@ $video
 
 The watermark filter takes two parameters:
 
-`$watermarkPath`, the path to your watermark file.
+`$watermarkPath`, is the path to your watermark file.
 `$coordinates`, an array defining how you want your watermark positioned. You can use relative positioning as demonstrated above or absolute as such:
 
 ```php
@@ -378,10 +378,10 @@ video. Frames can be extracted.
 
 ##### Transcoding
 
-You can transcode audios using the `FFMpeg\Media\Audio:save` method. You will
+You can transcode audio file(s) using the `FFMpeg\Media\Audio:save` method. You will
 pass a `FFMpeg\Format\FormatInterface` for that.
 
-Please note that audio kilobitrate is set on the audio format.
+Please note that the audio kilobitrate is set on the audio format.
 
 ```php
 $ffmpeg = FFMpeg\FFMpeg::create();
@@ -399,7 +399,7 @@ $format
 $audio->save($format, 'track.flac');
 ```
 
-Transcoding progress can be monitored in realtime, see Format documentation
+Transcoding progress can be monitored in real-time, see Format documentation
 below for more information.
 
 ##### Filters
@@ -422,13 +422,13 @@ $audio->filters()->clip(FFMpeg\Coordinate\TimeCode::fromSeconds(30), FFMpeg\Coor
 
 Add metadata to audio files. Just pass an array of key=value pairs of all
 metadata you would like to add. If no arguments are passed into the filter
-all metadata will be removed from input file. Currently supported data is
+all metadata will be removed from the input file. Currently supported data is
 title, artist, album, artist, composer, track, year, description, artwork
 
 ```php
 $audio->filters()->addMetadata(["title" => "Some Title", "track" => 1]);
 
-//remove all metadata and video streams from audio file
+//remove all metadata and video streams from the audio file
 $audio->filters()->addMetadata();
 ```
 
@@ -467,7 +467,7 @@ accurate images; it takes more time to execute.
 
 #### Gif
 
-A gif is an animated image extracted from a sequence of the video.
+A GIF is an animated image extracted from a sequence of the video.
 
 You can save gif files using the `FFMpeg\Media\Gif::save` method.
 
@@ -497,11 +497,11 @@ your files MUST have video and audio streams.
 
 In both cases, you will have to provide an array of files.
 
-To concatenate videos encoded with the same codec, do as follow:
+To concatenate videos encoded with the same codec, do as follows:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
-// We recommend that you put there the path of any of the video you want to use in this concatenation.
+// We recommend that you put there the path of any of the videos you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 $video
     ->concat(array('/path/to/video1', '/path/to/video2'))
@@ -510,11 +510,11 @@ $video
 
 The boolean parameter of the save function allows you to use the copy parameter which accelerates drastically the generation of the encoded file.
 
-To concatenate videos encoded with the different codec, do as follow:
+To concatenate videos encoded with the different codecs, do as follows:
 
 ```php
 // In order to instantiate the video object, you HAVE TO pass a path to a valid video file.
-// We recommend that you put there the path of any of the video you want to use in this concatenation.
+// We recommend that you put there the path of any of the videos you want to use in this concatenation.
 $video = $ffmpeg->open( '/path/to/video' );
 
 $format = new FFMpeg\Format\Video\X264();
@@ -547,12 +547,12 @@ $advancedMedia
     ->save();
 ```
 
-This code takes 2 input videos, stacks they horizontally in 1 output video and adds to this new video the audio from the first video.
+This code takes 2 input videos, stacks they horizontally in 1 output video, and adds to this new video the audio from the first video.
 (It is impossible with simple filtergraph that has only 1 input and only 1 output).
 
 
 #### Complicated example
-A more difficult example of possibilities of the AdvancedMedia. Consider all input videos already have the same resolution and duration. ("xstack" filter has been added in the 4.1 version of the ffmpeg).
+A more difficult example of possibilities of the AdvancedMedia. Consider all input videos already have the same resolution and duration. (The "xstack" filter has been added in the 4.1 version of the ffmpeg).
 
 ```php
 $inputs = array(
@@ -578,13 +578,13 @@ $advancedMedia
     ->save();
 ```
 
-This code takes 4 input videos, then the negates the first video, stores result in `[v0negate]` stream, detects edges in the second video, stores result in `[v1edgedetect]` stream, horizontally flips the third video, stores result in `[v2hflip]` stream, vertically flips the fourth video, stores result in `[v3vflip]` stream, then takes this 4 generated streams ans combine them in one 2x2 collage video.
-Then saves audios from the original videos into the 4 different formats and saves the generated collage video into the separate file.
+This code takes 4 input videos, then negates the first video, stores the result in the `[v0negate]` stream, detects edges in the second video, stores the result in `[v1edgedetect]` stream, horizontally flips the third video, stores result in `[v2hflip]` stream, vertically flips the fourth video, stores result in `[v3vflip]` stream, then takes this 4 generated streams and combine them in one 2x2 collage video.
+Then saves audio from the original videos into 4 different formats and saves the generated collage video into a separate file.
 
-As you can see, you can take multiple input sources, perform the complicated processing for them and produce multiple output files in the same time, in the one ffmpeg command.
+As you can see, you can take multiple input sources, perform the complicated processing for them, and produce multiple output files in the same time, in the one ffmpeg command.
 
 #### Just give me a map!
-You do not have to use `-filter_complex`. You can use only `-map` options. For example, just extract the audio from the video:
+You do not have to use `-filter_complex`. You can use only the `-map` options. For example, just extract the audio from the video:
 
 ```php
 $advancedMedia = $ffmpeg->openAdvanced(array('video.mp4'));
@@ -639,7 +639,7 @@ $video->save($format, 'video.avi');
 
 ##### Add initial parameters
 
-You can also add initial parameters to your encoding requests based on your video format. This can be expecially handy in overriding a default input codec in FFMpeg.
+You can also add initial parameters to your encoding requests based on your video format. This can be especially handy in overriding a default input codec in FFMpeg.
 
 The argument of the setInitialParameters method is an array.
 
@@ -687,14 +687,14 @@ class CustomWMVFormat extends FFMpeg\Format\Video\DefaultVideo
 FFMpeg uses many units for time and space coordinates.
 
 - `FFMpeg\Coordinate\AspectRatio` represents an aspect ratio.
-- `FFMpeg\Coordinate\Dimension` represent a dimension.
-- `FFMpeg\Coordinate\FrameRate` represent a framerate.
-- `FFMpeg\Coordinate\Point` represent a point. (Supports dynamic points since v0.10.0)
-- `FFMpeg\Coordinate\TimeCode` represent a timecode.
+- `FFMpeg\Coordinate\Dimension` represents a dimension.
+- `FFMpeg\Coordinate\FrameRate` represents a framerate.
+- `FFMpeg\Coordinate\Point` represents a point. (Supports dynamic points since v0.10.0)
+- `FFMpeg\Coordinate\TimeCode` represents a timecode.
 
 ### FFProbe
 
-`FFMpeg\FFProbe` is used internally by `FFMpeg\FFMpeg` to probe medias. You can
+`FFMpeg\FFProbe` is used internally by `FFMpeg\FFMpeg` to probe media. You can
 also use it to extract media metadata.
 
 ```php
